@@ -1,0 +1,142 @@
+Patches applied in the Debian version of :
+
+debian/patches/rrd_filter_path.dpatch (Sebastian Harl <sh@tokkee.org>):
+  Set the path of rrd_filter.px to /usr/lib/collectd/utils/.
+
+debian/patches/collection_conf_path.dpatch (Sebastian Harl <sh@tokkee.org>):
+  Set the path of collection.conf to /etc/collectd/.
+
+debian/patches/collection.cgi.dpatch (Fabiano Pires <fxp@ig.com.br>):
+  collection.cgi: Fixed apache data-sources.
+
+debian/patches/myplugin_includes.dpatch (Sebastian Harl <sh@tokkee.org>):
+  Let the example plugin include the core headers from
+  /usr/include/collectd/core.
+
+debian/patches/myplugin_api.dpatch (Sebastian Harl <sh@tokkee.org>):
+  Update myplugin.c to the latest collectd API.
+
+debian/patches/bts559801_plugin_find_fix.dpatch (Sebastian Harl <sh@tokkee.org>):
+  plugin: Use strcasecmp rather than strncasecmp to find a plugin.
+  
+  This makes collectd resistant against vulnerable copies of libltdl
+  (CVE-2009-3736).
+  See <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=559801#15>
+  for details.
+
+debian/patches/bts770681_riemann_ack.dpatch (John-John Tedro <udoprog@spotify.com>):
+  write_riemann plugin: Receive acknowledge message when using TCP.
+  
+  Not receiving an acknowledge message when communicating with riemann
+  over TCP will cause the riemann instance to eventually hang for
+  extended periods of time because of resource exhaustion.
+  
+  Upstream bug report:
+  https://github.com/collectd/collectd/pull/425
+  
+  Upstream commit:
+  https://github.com/spotify/collectd/commit/78c0678
+
+debian/patches/bts747093_lvm_segfault.dpatch (Jan Kundrát <jan.kundrat@cesnet.cz>):
+  bts747093_lvm_segfault.dpatch by Jan Kundrát <jan.kundrat@cesnet.cz>
+  
+  lvm: Fix segfault when there are no logical volumes.
+  
+  Upstream bug report:
+  https://github.com/collectd/collectd/issues/558
+  
+  Upstream commit:
+  https://github.com/jktjkt/collectd/commit/40dde67
+
+debian/patches/bts770683_curl_init.dpatch (Jeremy Katz <jeremy@katzbox.net>):
+  Call curl_global_init() in _init of plugins using curl.
+  
+  curl_global_init() or curl_easy_init() has to be called in the init
+  callback of plugins using curl while collectd still runs single
+  threaded. Else, collectd may crash with a segfault due to concurrent
+  memory access by curl.
+  
+  Upstream bug report:
+  https://github.com/collectd/collectd/issues/526
+  
+  Upstream commits:
+  https://github.com/katzj/collectd/commit/401fa6e
+
+debian/patches/bts750440_config_segfault.dpatch (Wilfried Goesgens <dothebart@citadel.org>):
+  Fixed a segfault when handling/including empty config files.
+  
+  Correctly handle the case of empty "children" nodes.
+  
+  Upstream bug report:
+  https://github.com/collectd/collectd/issues/638
+  
+  Upstream commit:
+  https://github.com/dothebart/collectd/commit/2923883
+
+debian/patches/bts770688_snmp_memleak.dpatch (Pierre-Yves Ritschard <pyr@spootnik.org>):
+  Let snmp_synch_response deal with PDU freeing
+  
+  When reading from tables, upon errors the PDUs sent are already
+  freed by snmp_synch_response since they are right after
+  snmp_send is called.
+  
+  This commit syncs collectd's approach with other occurences of
+  snmp_synch_response calls.
+  
+  There might be a few corner cases where we leak PDUs, but it
+  is unclear how to check for those since we would need to
+  have an indication that snmp_send was never called, which
+  as far as I can tell is not possible.
+  
+  The potential for failure in snmp_send is rather low and will
+  be easily spotted though, since when crafting invalid PDUs
+  snmp send will constantly fail and since valid configurations
+  can never leak memory.
+  
+  Upstream bug reports:
+  https://github.com/collectd/collectd/issues/610
+  https://github.com/collectd/collectd/issues/804
+
+debian/patches/bts770690_java_jni_thread_detach.dpatch (Florian Forster <octo@google.com>):
+  java plugin: Make sure cjni_thread_detach() is called on all paths.
+  Each call to cjni_thread_attach() much be accompanied by a call to
+  cjni_thread_detach(). Some error handling cases were missing the call,
+  potentially locking the plugin up.
+  
+  Also ensure that cjni_thread_detach() does not hide the status of other
+  operations.
+  
+  Upstream commit:
+  https://github.com/collectd/collectd/commit/513a5ca
+
+debian/patches/bts770693_timestamps.dpatch ():
+  Fixed handling of timestamps in notifications.
+  
+  Starting with collectd 5, timestamps use nano-second resolution rather
+  than seconds. Notitications did not handle that correctly, leading to
+  invalid time-stamps and potentially invalid memory access.
+  
+  Upstream commits:
+  https://github.com/collectd/collectd/commit/...
+  d571f4645593c16a26a98aa635b1952286089266 by Justin Burnham <jburnham@mediatemple.net>
+  43fcfd6a48b506b03114dd9637caf8fc211b47db by Adrian Miron <adrian.miron.v2@gmail.com>
+  ac78faa99d4b34c78a7bca741430c06c56e6f32c by Manuel Luis Sanmartín Rozada <manuel.luis@gmail.com>
+  f5c294b7355cee34df44b1c5b8ac3ef7b85664cd by Manuel Luis Sanmartín Rozada <manuel.luis@gmail.com>
+  7d1d59fb064f2a9adfba50d3ea5c39ebc6bebd3c by Manuel Luis Sanmartín Rozada <manuel.luis@gmail.com>
+  07e4683f7f985668641d79137b64d148bc18ba8a by Manuel Luis Sanmartín Rozada <manuel.luis@gmail.com>
+  524b85687dbbd4cc2bbb650caf300162dcd16e96 by Marc Fournier <marc.fournier@camptocamp.com>
+
+debian/patches/bts770694_loglevel.dpatch ():
+  Make sure not to disable logging on invalid log levels.
+  
+  Debug logging is not compiled into the Debian packages. Make sure to
+  fall back to INFO and report and error rather than silently dropping
+  all further log messages.
+  
+  Upstream bug report:
+  https://github.com/collectd/collectd/issues/636
+  
+  Upstream commits:
+  https://github.com/dothebart/collectd/commit/84c3805
+  https://github.com/collectd/collectd/commit/cb4ea71
+

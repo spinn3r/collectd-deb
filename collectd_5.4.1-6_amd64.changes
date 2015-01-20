@@ -1,0 +1,76 @@
+Format: 1.8
+Date: Sun, 23 Nov 2014 15:27:15 +0100
+Source: collectd
+Binary: collectd-core collectd collectd-utils collectd-dbg collectd-dev libcollectdclient-dev libcollectdclient1
+Architecture: source amd64 all
+Version: 5.4.1-6
+Distribution: unstable
+Urgency: medium
+Maintainer: Sebastian Harl <tokkee@debian.org>
+Changed-By: Sebastian Harl <tokkee@debian.org>
+Description: 
+ collectd   - statistics collection and monitoring daemon
+ collectd-core - statistics collection and monitoring daemon (core system)
+ collectd-dbg - statistics collection and monitoring daemon (debugging symbols)
+ collectd-dev - statistics collection and monitoring daemon (development files)
+ collectd-utils - statistics collection and monitoring daemon (utilities)
+ libcollectdclient-dev - client library for collectd's control interface (development file
+ libcollectdclient1 - client library for collectd's control interface
+Closes: 687067 747093 750440 770681 770683 770685 770688 770690 770693 770694
+Changes: 
+ collectd (5.4.1-6) unstable; urgency=medium
+ .
+   * debian/patches:
+     - Added bts770681_riemann_ack: upstream fix for the write_riemann plugin
+       to avoid locking up a remote Riemann instance; thanks to Marc Fournier
+       for reporting this (Closes: #770681).
+     - Added bts747093_lvm_segfault: upstream fix for a segfault in the LVM
+       plugin; thanks to Bernd Zeimetz and Marc Fournier for reporting this
+       (Closes: #747093).
+     - Added bts770683_curl_init: upstream fix for a segfault in plugins using
+       libcurl caused by concurrent memory access; thanks to Marc Fournier for
+       reporting this (Closes: #770683, cf. #735173).
+     - Added bts750440_config_segfault: upstream fix for a segfault when
+       including empty config files; thanks to Bernd Zeimetz and Marc Fournier
+       for reporting this (Closes: #750440, #770685).
+     - Added bts770688_snmp_memleak: upstream fix for a memory leak in the
+       SNMP plugin; thanks to Marc Fournier for reporting this
+       (Closes: #770688).
+     - Added bts770690_java_jni_thread_detach: upstream fix for locking up the
+       Java plugin by not properly detaching from the JVM in error conditions;
+       thanks to Marc Fournier for reporting this (Closes: #770690).
+     - Added bts770693_timestamps: upstream fix for handling internal
+       timestamps; thanks to Marc Fournier for reporting this (Closes: #770693)
+     - Added bts770694_loglevel: upstream fix to correct logging behavior when
+       using an invalid log level; thanks to Marc Fournier for reporting this
+       (Closes: #770694, #687067).
+Checksums-Sha1: 
+ 097ea9d7161fd3b088762a239a05362e1cf3c528 2343 collectd_5.4.1-6.dsc
+ b4f9a932ee80f647bf3ec2cc38a46eafe0dc52ef 84373 collectd_5.4.1-6.diff.gz
+ b0fea65f1d8bb786a175442c08fff6b734406321 1005696 collectd-core_5.4.1-6_amd64.deb
+ 158fa18bf929e2b775493d569f2df8b415cfdcf2 89130 collectd_5.4.1-6_amd64.deb
+ 80f77e593037297fbfaecc3f25bd939294daf987 104978 collectd-utils_5.4.1-6_amd64.deb
+ 516793a022b5f99281e69fe203145bb86647908a 1513958 collectd-dbg_5.4.1-6_amd64.deb
+ ba17d0b47c6763b47c0165f2b4985837c58a43cc 82992 libcollectdclient-dev_5.4.1-6_amd64.deb
+ 368644d59af2025273c659acd5d31169d891d1a4 94168 libcollectdclient1_5.4.1-6_amd64.deb
+ c4ba2c92b2650f5e168fe9bdc325dc07618ba506 125996 collectd-dev_5.4.1-6_all.deb
+Checksums-Sha256: 
+ 61cae8cce1a1d9cf18c6ef878a0debdc2085f3580ee6844950f5b9c8b3031925 2343 collectd_5.4.1-6.dsc
+ 6ed3a7a851015af5873f82f5a09d525f7399c5f8e9ee87fbb31b3841d7e67722 84373 collectd_5.4.1-6.diff.gz
+ ef2d52d1590087704387e677f3ea360bdd7ed184005cae7ed252dd42205519de 1005696 collectd-core_5.4.1-6_amd64.deb
+ 2fce94dc23cf1d8dabd42be81245089545f368f44017f773c66f4b7245f2cf5d 89130 collectd_5.4.1-6_amd64.deb
+ 6285c483f2723411523a1c8d19e672a74dbddadb609ba5c34c0895367daf867c 104978 collectd-utils_5.4.1-6_amd64.deb
+ ad9f57b1da7b947d3f3efc648745c8599e220e7bef475cde8969c6544e002aca 1513958 collectd-dbg_5.4.1-6_amd64.deb
+ 5d5a7247621475c51e15ef865e9208e2bda95c46ae70b9e640faac047d973009 82992 libcollectdclient-dev_5.4.1-6_amd64.deb
+ b0f3b5c381959e80ead9829abaf8d99c816722a9623480c38136b877c6cf71c9 94168 libcollectdclient1_5.4.1-6_amd64.deb
+ 2ec9a1e4f4ded92fd01dbb229f40ad839c718d67ddb2d29c91de2bb34d36fb22 125996 collectd-dev_5.4.1-6_all.deb
+Files: 
+ 54206daf62eebd8828945a337a105d55 2343 utils optional collectd_5.4.1-6.dsc
+ c766aea9f1fae0ed1f76e2667211cdcc 84373 utils optional collectd_5.4.1-6.diff.gz
+ f47d0deae46743246b9a7ed17a4afdd5 1005696 utils optional collectd-core_5.4.1-6_amd64.deb
+ cfc500a74af98585aef737e09c697dd8 89130 utils optional collectd_5.4.1-6_amd64.deb
+ b7d09174044a1d0db16221fc9e2633a1 104978 utils optional collectd-utils_5.4.1-6_amd64.deb
+ 12859f3449d4c841c7900e953edc95a8 1513958 debug extra collectd-dbg_5.4.1-6_amd64.deb
+ c14063e78ddd527687270cb989d877d1 82992 libdevel optional libcollectdclient-dev_5.4.1-6_amd64.deb
+ b7216e9c10ffbbefef8f2fa96a93809c 94168 libs optional libcollectdclient1_5.4.1-6_amd64.deb
+ 1237bba0311b1157099d8e75a6b94002 125996 utils optional collectd-dev_5.4.1-6_all.deb

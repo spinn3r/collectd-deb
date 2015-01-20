@@ -1,0 +1,4 @@
+patching file src/plugin.c
+Hunk #1 succeeded at 895 (offset 303 lines).
+Hunk #2 succeeded at 934 with fuzz 1 (offset 324 lines).
+Hunk #3 succeeded at 945 (offset 324 lines).

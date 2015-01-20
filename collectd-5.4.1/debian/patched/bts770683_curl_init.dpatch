@@ -1,0 +1,4 @@
+patching file src/curl.c
+patching file src/curl_json.c
+patching file src/curl_xml.c
+patching file src/write_http.c

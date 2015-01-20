@@ -1,0 +1,3 @@
+patching file src/configfile.c
+Hunk #1 succeeded at 477 (offset 63 lines).
+Hunk #2 succeeded at 597 with fuzz 1 (offset 77 lines).

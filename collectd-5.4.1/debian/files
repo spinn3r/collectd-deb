@@ -1,0 +1,7 @@
+collectd-core_5.4.1-6_amd64.deb utils optional
+collectd_5.4.1-6_amd64.deb utils optional
+collectd-utils_5.4.1-6_amd64.deb utils optional
+collectd-dbg_5.4.1-6_amd64.deb debug extra
+libcollectdclient-dev_5.4.1-6_amd64.deb libdevel optional
+libcollectdclient1_5.4.1-6_amd64.deb libs optional
+collectd-dev_5.4.1-6_all.deb utils optional

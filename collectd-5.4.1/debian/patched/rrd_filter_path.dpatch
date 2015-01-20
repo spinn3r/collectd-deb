@@ -1,0 +1,4 @@
+patching file contrib/migrate-3-4.px
+Hunk #1 succeeded at 167 with fuzz 1 (offset 1 line).
+Hunk #2 succeeded at 363 (offset 2 lines).
+patching file contrib/migrate-4-5.px
